@@ -11,9 +11,18 @@ The idea of this project is to build a pipeline to discover dense communities of
 
 ## Technologies
 1. Amazon S3 - StackOverflow data dump
-2. Apache Flink - Graph analysis on batches of data
-3. HBase - Database
+2. Apache Spark - Graph analysis on batches of data
+3. PostgreSQL - Database
 4. Flask - UI
 
 ## Proposed architecture
-StackOverflow -> S3 -> Flink -> HBase -> Flask UI
+StackOverflow -> S3 -> Spark -> PostgreSQL -> Flask UI
+
+## Engineering challenges
+1. Creating the pipeline to efficiently handle the data and process it.
+2. Implementing k-core graph algorithm that is not available in GraphX library yet.
+3. k-core in distributed systems.
+
+## Constraints
+* The data dump is not that huge (~150GB)
+* Solution: Simulate streaming data for StackOverflow
