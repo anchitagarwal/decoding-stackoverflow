@@ -6,8 +6,9 @@ The idea of this project is to build a pipeline to discover dense communities of
 
 ## Use Case
 1. Find the most active and influencial users on StackOverflow for the top trending tags.
-2. Companies and potential employers can analyze the graph to target future employees.
+2. For every user, suggest questions in their expert area.
 3. Data scientists can leverage the graph to extract useful information about each tag.
+4. Companies and potential employers can analyze the graph to target future employees.
 
 ## Technologies
 1. Amazon S3 - StackOverflow data dump
@@ -20,8 +21,7 @@ StackOverflow -> S3 -> Spark -> PostgreSQL -> Flask UI
 
 ## Engineering challenges
 1. Creating the pipeline to efficiently handle the data and process it.
-2. Implementing k-core graph algorithm that is not available in GraphX library yet.
-3. k-core in distributed systems.
+2. Finding the 1-circle network for a user efficiently.
 
 ## Constraints
 * The data dump is not that huge (~150GB)
