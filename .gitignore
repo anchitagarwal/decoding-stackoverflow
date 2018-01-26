@@ -1,0 +1,12 @@
+# ignore IntelliJ IDEA files
+**/.idea
+
+# ignore build output directories
+**/target
+
+# ignore properties file
+application.conf
+
+# ignore test scripts/files
+Test.scala
+test
