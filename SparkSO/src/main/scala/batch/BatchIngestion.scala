@@ -50,6 +50,7 @@ object BatchIngestion {
                 )
             }
         )
+        postQuestionsRDD.take(20).foreach(println)
 
         // read `posts_answers.json` from S3 bucket and load data into RDD
         val postAnswersRDD: RDD[Row] = sparkSession.read.json(s3Bucket + "posts_answers.json").rdd.map(
