@@ -4,8 +4,11 @@
 # ignore build output directories
 **/target
 
-# ignore properties file
-application.conf
+# ignore all properties file
+*.conf
+
+# ignore all .pyc files
+*.pyc
 
 # ignore test scripts/files
 Test.scala

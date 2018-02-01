@@ -68,9 +68,10 @@ object BatchPostAnalysis {
         val mongoUser: String = cf.getString("mongo.user")
         val mongoPassword: String = cf.getString("mongo.password")
 
-        val writeConfigAccepted: WriteConfig =
+        val writeConfig: WriteConfig =
             WriteConfig(Map("uri" -> s"mongodb://$mongoUser:$mongoPassword@$mongoURI/insight.recommendedPost"))
-        MongoSpark.save(recommendedPosts, writeConfigAccepted)
+//        MongoSpark.save(recommendedPosts, writeConfigAccepted)
+        MongoSpark.save(recommendedPosts.write, writeConfig)
     }
 
     /**
@@ -98,7 +99,7 @@ object BatchPostAnalysis {
         /** store the User and Posts table in Postgres to be later used for UI */
 //        insertIntoPostgres(userDF: DataFrame, postDF: DataFrame, cf: Config)
 
-        val postRDD = postDF.rdd.sample(false, 0.01, 42L)
+        val postRDD = postDF.rdd.sample(false, 0.1, 42L)
 //        val postRDD = postDF.rdd
 
         /**
@@ -222,7 +223,9 @@ object BatchPostAnalysis {
 
                 var res: Array[(String, String, Int)] = Array.empty
                 for (i <- posts) {
-                    res = res :+ (i, u2, wt)
+                    if (!acceptedPostMap.contains(i)) {
+                        res = res :+ (i, u2, wt)
+                    }
                 }
                 (u1, res)
             })
@@ -238,7 +241,7 @@ object BatchPostAnalysis {
         val sqlContext = sparkSession.sqlContext
         import sqlContext.implicits._
 
-        val recommendedPostDF: DataFrame = recommendedPostsRDD.toDF("id", "posts")
+        val recommendedPostDF: DataFrame = recommendedPostsRDD.toDF("_id", "posts")
         saveRecommendations(cf, recommendedPostDF)
     }
 }
