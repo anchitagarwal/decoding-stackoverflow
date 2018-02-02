@@ -11,7 +11,7 @@ The idea is to build a platform that recommends open Stackoverflow questions to 
 * The recommended posts will be in user's expert area, which is determined by their interactions and behavior
 
 ## Architecture
-![data pipeline]( decoding-stackoverflow/util/data_pipeline.png  "Data Pipeline")
+![data pipeline](https://github.com/anchitagarwal/decoding-stackoverflow/blob/master/util/data_pipeline.png  "Data Pipeline")
 
 ## Engineering challenges
 1. Creating the pipeline to efficiently handle the data and process it.
